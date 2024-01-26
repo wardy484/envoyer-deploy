@@ -1,92 +1,70 @@
-# :package_description
+# Envoyer Deploy
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/tutorauk/envoyer-deploy.svg?style=flat-square)](https://packagist.org/packages/tutorauk/envoyer-deploy)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Envoyer deployer is a laravel package that enables you to deploy to your  Laravel Envoyer site from an artisan command!
 
-## Support us
+```shell
+php artisan envoyer:deploy
+```
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require tutorauk/envoyer-deploy
 ```
 
-You can publish and run the migrations with:
+You will need an envoyer api token. You can generate one on the [Envoyer site](https://envoyer.io/user/api-tokens). You should currently only need the `deployments:create` and `deployments:delete` scope.
 
-```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
+Add this to your .env file:
+````dotenv
+ENVOYER_API_TOKEN=<your token>
+````
+
+You should next publish the config file:
+```shell
+php artisan vendor:publish --tag="envoyer-deploy-config"
 ```
 
-You can publish the config file with:
+Then change the default_project and default_branch to suite your project. 
 
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
+In order to ensure that the branch selection isn't an endless list of branches that exist on your machine but don't really exist anymore, it is highly recommended you purge some of the dead branches from your machine.
 ```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
-```
+git fetch -p
+``` 
 
 ## Usage
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+Artisan deploy is a tool that allows you to easily deploy to the staging from the command line.
+
+You can trigger a deployment of remote branches using the following command:
+```shell
+php artisan deploy
+```
+This will give you a prompt to select a branch. By default this will be pre-populated with your current branch (regardless of whether it exists remote).
+
+Should you wish to quickly deploy to main you can pre-populate the prompt with the `-m` or `--main` flag:
+```shell
+php artisan deploy -m
 ```
 
-## Testing
-
-```bash
-composer test
+You can optionally skip the branch prompt using `-f`. This will deploy your current branch or master if used in combination with `-m`:
+```shell
+php artisan deploy -f
 ```
 
-## Changelog
+You can list the most recent deployments using:
+```shell
+php artisan deploy:list
+```
 
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Credits
-
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+You can cancel the most recent deployment with:
+```shell
+php artisan deploy:cancel
+```
 
 ## License
 
