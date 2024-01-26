@@ -41,7 +41,7 @@ class CancelDeploymentCommand extends Command
      */
     public function handle()
     {
-        $project = config('deploy.default_project');
+        $project = config('envoyer_deploy.default_project');
         $projectId = $this->envoyer->getProjectId($project);
 
         $deployment = $this->envoyer->getLatestDeployment($projectId);

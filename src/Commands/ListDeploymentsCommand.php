@@ -42,7 +42,7 @@ class ListDeploymentsCommand extends Command
      */
     public function handle()
     {
-        $project = config('deploy.default_project');
+        $project = config('envoyer_deploy.default_project');
         $projectId = $this->envoyer->getProjectId($project);
 
         $deployments = $this->envoyer->getDeployments($projectId);

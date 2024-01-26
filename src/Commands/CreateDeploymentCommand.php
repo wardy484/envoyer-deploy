@@ -57,7 +57,7 @@ class CreateDeploymentCommand extends Command
      */
     public function handle()
     {
-        $project = config('deploy.default_project');
+        $project = config('envoyer_deploy.default_project');
         $projectId = $this->envoyer->getProjectId($project);
         $branch = $this->option('force')
             ? $this->getDefaultBranch()
@@ -131,7 +131,7 @@ class CreateDeploymentCommand extends Command
     private function getDefaultBranch(): string
     {
         return $this->option('main')
-            ? config('deploy.default_branch')
+            ? config('envoyer_deploy.default_branch')
             : $this->git->getCurrentBranch();
     }
 }

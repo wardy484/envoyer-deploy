@@ -26,7 +26,7 @@ class Envoyer
         }
 
         $this->client = Http::withToken($token);
-        $this->baseUrl = config('deploy.base_url');
+        $this->baseUrl = config('envoyer_deploy.base_url');
     }
 
     public function getProjectId(string $projectName): int
