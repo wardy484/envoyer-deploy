@@ -19,7 +19,7 @@ class Envoyer
      */
     public function __construct()
     {
-        $token = config('deploy.api_token');
+        $token = config('envoyer_deploy.api_token');
 
         if ($token === null || $token === '') {
             throw new \Exception('Envoyer API token not set');
