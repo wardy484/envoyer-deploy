@@ -9,7 +9,8 @@ class Process
         public readonly int $sequence,
         public readonly string $status,
         public readonly string $name,
-    ) {}
+    ) {
+    }
 
     /**
      * @param  array<string, mixed>  $data

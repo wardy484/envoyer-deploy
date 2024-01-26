@@ -23,9 +23,9 @@ class Git
 
         return collect(explode(' ', $result))
             ->unique()
-            ->where(fn($value) => ! in_array($value, ['->', 'origin/HEAD', 'origin/master', '']))
+            ->where(fn ($value) => ! in_array($value, ['->', 'origin/HEAD', 'origin/master', '']))
             ->map(
-                fn($value) => Str::of($value)
+                fn ($value) => Str::of($value)
                     ->replace('origin/', '')
                     ->trim()
                     ->toString()

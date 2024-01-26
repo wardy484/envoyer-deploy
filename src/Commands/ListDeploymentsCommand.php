@@ -55,7 +55,7 @@ class ListDeploymentsCommand extends Command
                     $deployment->commitAuthor,
                     $deployment->commitBranch,
                     $deployment->commitHash,
-                    $deployment->getDuration() . 's',
+                    $deployment->getDuration().'s',
                     $deployment->status,
                 ];
             })->toArray()

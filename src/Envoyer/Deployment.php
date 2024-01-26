@@ -20,7 +20,8 @@ class Deployment
          * @var Collection<int, Process> $processes
          */
         public readonly Collection $processes,
-    ) {}
+    ) {
+    }
 
     /**
      * @param  array<string, mixed>  $data
@@ -46,7 +47,7 @@ class Deployment
      */
     private static function createProcessCollection(array $processesData): Collection
     {
-        return new Collection(array_map(fn($process) => Process::fromArray($process), $processesData));
+        return new Collection(array_map(fn ($process) => Process::fromArray($process), $processesData));
     }
 
     public function getUrl(): string

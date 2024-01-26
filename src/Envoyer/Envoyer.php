@@ -66,8 +66,8 @@ class Envoyer
             ->json('deployments');
 
         return collect($deployments)
-            ->map(fn($deployment) => Deployment::fromArray($deployment))
-            ->sortByDesc(fn(Deployment $deployment) => $deployment->createdAt);
+            ->map(fn ($deployment) => Deployment::fromArray($deployment))
+            ->sortByDesc(fn (Deployment $deployment) => $deployment->createdAt);
     }
 
     public function getLatestDeployment(int $projectId): Deployment
