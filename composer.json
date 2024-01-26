@@ -75,11 +75,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tutorful\\EnvoyerDeploy\\SkeletonServiceProvider"
-            ],
-            "aliases": {
-                "Skeleton": "Tutorful\\EnvoyerDeploy\\Facades\\Skeleton"
-            }
+                "Tutorful\\EnvoyerDeploy\\EnvoyerDeployServiceProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
